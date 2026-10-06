@@ -1,6 +1,7 @@
-import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import "./App.css";
+
 export default function App() {
   const [users, setUsers] = useState([]);
 
@@ -11,18 +12,19 @@ export default function App() {
           "https://jsonplaceholder.typicode.com/users",
         );
         setUsers(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
       fetchData();
     };
-  });
+  }, []);
   return (
     <>
       <div>
         <ul>
           {users.map((user) => (
-            <li key={user.id}>
+            <li>
               <h2>{user.name}</h2>
             </li>
           ))}
